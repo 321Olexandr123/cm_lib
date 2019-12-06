@@ -17,35 +17,62 @@ class Stock
 {
     /**
      *
-     */
-    public function course()
-    {
-
-    }
-
-    /**
+     * @param string $stock
+     * @param string $authorization
+     * @param string $token
      * @return array
-     * @throws TransportExceptionInterface
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
      */
-    public function withdraw()
+    public function course(string $stock, string $authorization, string $token)
+    {
+        $client = new NativeHttpClient();
+
+        $response = $client->request('POST', 'http://cm.com/exchange/course', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => $authorization,
+                'Token' => $token
+            ],
+            'json' => [
+                'stock' => $stock,
+            ]
+        ]);
+        return $response->toArray();
+    }
+
+    /**
+     * @param string $stock
+     * @param string $address
+     * @param int $amount
+     * @param string $currency
+     * @param string $authorization
+     * @param string $token
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function withdraw(string $stock, string $address, int $amount, string $currency, string $authorization, string $token)
     {
         $client = new NativeHttpClient();
 
         $response = $client->request('POST', 'http://cm.com/exchange/withdraw', [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => $credential['Authorization'],
-                'Token' => $credential['Token']
+                'Authorization' => $authorization,
+                'Token' => $token
             ],
             'json' => [
-                'stock' => 'huobi',
-                'address' => '0xf2daaf10931f51969ef0d580d59ee95b2a49e3dd',
-                'amount' => 3,
-                'currency' => 'usdt'
+                'stock' => $stock,
+                'address' => $address,
+                'amount' => $amount,
+                'currency' => $currency
             ]
         ]);
         return $response->toArray();
