@@ -27,7 +27,7 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public function course(string $stock, string $authorization, string $token)
+    public static function course(string $stock, string $authorization, string $token)
     {
         $client = new NativeHttpClient();
 
@@ -58,7 +58,7 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public function withdraw(string $stock, string $address, int $amount, string $currency, string $authorization, string $token)
+    public static function withdraw(string $stock, string $address, int $amount, string $currency, string $authorization, string $token)
     {
         $client = new NativeHttpClient();
 
