@@ -17,9 +17,7 @@ class Stock
 {
     /**
      *
-     * @param string $stock
-     * @param string $authorization
-     * @param string $token
+     * @param string $bearer
      * @return array
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
@@ -27,30 +25,24 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public static function course(string $stock, string $authorization, string $token)
+    public static function course(string $bearer)
     {
         $client = new NativeHttpClient();
 
         $response = $client->request('POST', 'http://cm.com/exchange/course', [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => $authorization,
-                'Token' => $token
-            ],
-            'json' => [
-                'stock' => $stock,
+                'Authorization' => 'Bearer '.$bearer
             ]
         ]);
         return $response->toArray();
     }
 
     /**
-     * @param string $stock
      * @param string $address
      * @param int $amount
      * @param string $currency
-     * @param string $authorization
-     * @param string $token
+     * @param string $bearer
      * @return array
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
@@ -58,18 +50,16 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public static function withdraw(string $stock, string $address, int $amount, string $currency, string $authorization, string $token)
+    public static function withdraw(string $address, int $amount, string $currency, string $bearer)
     {
         $client = new NativeHttpClient();
 
         $response = $client->request('POST', 'http://cm.com/exchange/withdraw', [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => $authorization,
-                'Token' => $token
+                'Authorization' => 'Bearer '.$bearer
             ],
             'json' => [
-                'stock' => $stock,
                 'address' => $address,
                 'amount' => $amount,
                 'currency' => $currency
