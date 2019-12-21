@@ -25,11 +25,11 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public static function generateCourse(string $bearer)
+    public static function generatePair(string $bearer)
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.com/exchange/generate-course', [
+        $response = $client->request('POST', 'http://cm.com/exchange/generate-pair', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
