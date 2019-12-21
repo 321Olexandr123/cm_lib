@@ -25,14 +25,41 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public static function course(string $bearer)
+    public static function generateCourse(string $bearer)
+    {
+        $client = new NativeHttpClient();
+
+        $response = $client->request('POST', 'http://cm.com/exchange/generate-course', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $bearer
+            ]
+        ]);
+        return $response->toArray();
+    }
+
+    /**
+     *
+     * @param string $bearer
+     * @param array $pair
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public static function course(string $bearer, array $pair)
     {
         $client = new NativeHttpClient();
 
         $response = $client->request('POST', 'http://cm.com/exchange/course', [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer '.$bearer
+                'Authorization' => 'Bearer ' . $bearer
+            ],
+            'json' => [
+                'pair' => $pair
             ]
         ]);
         return $response->toArray();
@@ -57,7 +84,7 @@ class Stock
         $response = $client->request('POST', 'http://cm.com/exchange/withdraw', [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer '.$bearer
+                'Authorization' => 'Bearer ' . $bearer
             ],
             'json' => [
                 'address' => $address,
