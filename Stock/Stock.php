@@ -94,4 +94,32 @@ class Stock
         ]);
         return $response->toArray();
     }
+
+    /**
+     * @param string $currency
+     * @param float $amount
+     * @param string $bearer
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public static function payment(string $currency, float $amount, string $bearer)
+    {
+        $client = new NativeHttpClient();
+
+        $response = $client->request('GET', 'http://cm.com/exchange/payment', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $bearer
+            ],
+            'json' => [
+                'currency' => $currency,
+                'amount' => $amount
+            ]
+        ]);
+        return $response->toArray();
+    }
 }
