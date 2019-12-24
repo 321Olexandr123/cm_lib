@@ -110,7 +110,7 @@ class Stock
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('GET', 'http://cm.com/exchange/payment', [
+        $response = $client->request('POST', 'http://cm.com/exchange/payment', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
