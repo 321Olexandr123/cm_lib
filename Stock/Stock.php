@@ -122,4 +122,30 @@ class Stock
         ]);
         return $response->toArray();
     }
+
+    /**
+     * @param string $token
+     * @param string $bearer
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public static function checkDepositStatus(string $token, string $bearer)
+    {
+        $client = new NativeHttpClient();
+
+        $response = $client->request('POST', 'http://cm.com/exchange/deposit-status', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $bearer
+            ],
+            'json' => [
+                'token' => $token,
+            ]
+        ]);
+        return $response->toArray();
+    }
 }
