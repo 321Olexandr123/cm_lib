@@ -29,7 +29,7 @@ class Stock
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.com/exchange/generate-pair', [
+        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/generate-pair', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
@@ -53,7 +53,7 @@ class Stock
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.com/exchange/course', [
+        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/course', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
@@ -81,7 +81,7 @@ class Stock
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.com/exchange/withdraw', [
+        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/withdraw', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
@@ -110,7 +110,7 @@ class Stock
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.com/exchange/payment', [
+        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/payment', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
@@ -137,7 +137,7 @@ class Stock
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.com/exchange/deposit-status', [
+        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/deposit-status', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
