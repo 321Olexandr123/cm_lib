@@ -160,7 +160,7 @@ class Stock
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/payment', [
+        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/create-payment', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
