@@ -25,11 +25,11 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public static function generatePair(string $bearer)
+    public static function generateCryptocurrency(string $bearer)
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/generate-pair', [
+        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/generate-cryptocurrency', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
@@ -41,7 +41,6 @@ class Stock
     /**
      *
      * @param string $bearer
-     * @param array $pair
      * @return array
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
@@ -49,17 +48,68 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public static function course(string $bearer, array $pair)
+    public static function generateCurrency(string $bearer)
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/course', [
+        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/generate-currency', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $bearer
+            ]
+        ]);
+        return $response->toArray();
+    }
+
+    /**
+     *
+     * @param array $cryptocurrency
+     * @param string $bearer
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public static function updateActiveCryptocurrency(array $cryptocurrency, string $bearer)
+    {
+        $client = new NativeHttpClient();
+
+        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/active-cryptocurrency', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
             ],
             'json' => [
-                'pair' => $pair
+                'cryptocurrency' => $cryptocurrency
+            ]
+        ]);
+        return $response->toArray();
+    }
+
+    /**
+     *
+     * @param array $currency
+     * @param string $bearer
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public static function updateActiveCurrency(array $currency, string $bearer)
+    {
+        $client = new NativeHttpClient();
+
+        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/active-currency', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $bearer
+            ],
+            'json' => [
+                'currency' => $currency
             ]
         ]);
         return $response->toArray();
@@ -106,7 +156,7 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public static function payment(string $currency, float $amount, string $bearer)
+    public static function createPayment(string $currency, float $amount, string $bearer)
     {
         $client = new NativeHttpClient();
 
