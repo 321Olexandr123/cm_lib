@@ -128,7 +128,7 @@ class Stock
     }
 
     /**
-     * @param string $token
+     * @param string $txn
      * @param string $bearer
      * @return array
      * @throws ClientExceptionInterface
@@ -138,7 +138,7 @@ class Stock
      * @throws TransportExceptionInterface
      */
     public
-    static function checkDepositStatus(string $token, string $bearer)
+    static function checkDepositStatus(string $txn, string $bearer)
     {
         $client = new NativeHttpClient();
 
@@ -148,7 +148,7 @@ class Stock
                 'Authorization' => 'Bearer ' . $bearer
             ],
             'json' => [
-                'token' => $token,
+                'txn' => $txn,
             ]
         ]);
         return $response->toArray();
