@@ -78,7 +78,7 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public static function withdraw(string $address, int $amount, string $currency, string $constant, string $bearer)
+    public static function withdraw(string $address, int $amount, string $currency, float $constant, string $bearer)
     {
         $client = new NativeHttpClient();
 
