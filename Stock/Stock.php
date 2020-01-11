@@ -98,6 +98,7 @@ class Stock
     }
 
     /**
+     * @param string $email
      * @param string $currency
      * @param float $amount
      * @param string $bearer
@@ -108,7 +109,7 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public static function createPayment(string $currency, float $amount, string $bearer)
+    public static function createPayment(string $email, string $currency, float $amount, string $bearer)
     {
         $client = new NativeHttpClient();
 
@@ -119,7 +120,8 @@ class Stock
             ],
             'json' => [
                 'currency' => $currency,
-                'amount' => $amount
+                'amount' => $amount,
+                'email' => $email
             ]
         ]);
         return $response->toArray();
@@ -135,7 +137,8 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public static function checkDepositStatus(string $token, string $bearer)
+    public
+    static function checkDepositStatus(string $token, string $bearer)
     {
         $client = new NativeHttpClient();
 
