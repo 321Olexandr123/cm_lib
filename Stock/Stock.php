@@ -66,7 +66,6 @@ class Stock
     }
 
     /**
-     * @param string $email
      * @param string $address
      * @param int $amount
      * @param string $currency
@@ -79,7 +78,7 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public static function withdraw(string $email, string $address, int $amount, string $currency, float $constant, string $bearer)
+    public static function withdraw(string $address, int $amount, string $currency, float $constant, string $bearer)
     {
         $client = new NativeHttpClient();
 
@@ -89,7 +88,6 @@ class Stock
                 'Authorization' => 'Bearer ' . $bearer
             ],
             'json' => [
-                'email' => $email,
                 'address' => $address,
                 'amount' => $amount,
                 'currency' => $currency,
