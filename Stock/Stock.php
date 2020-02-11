@@ -158,7 +158,11 @@ class Stock
      * @param int $id
      * @param string $currency
      * @param string $bearer
-     * @return void
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
     public
@@ -176,5 +180,6 @@ class Stock
                 'currency' => $currency
             ]
         ]);
+        return $res->toArray();
     }
 }
