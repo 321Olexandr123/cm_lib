@@ -168,7 +168,7 @@ class Stock
      * @throws TransportExceptionInterface
      */
     public
-    static function getWithdrawStatus(int $id, string $currency, string $bearer)
+    static function getWithdrawStatus(int $id, string $bearer)
     {
         $client = new NativeHttpClient();
 
@@ -178,8 +178,7 @@ class Stock
                 'Authorization' => 'Bearer ' . $bearer
             ],
             'json' => [
-                'id' => $id,
-                'currency' => $currency
+                'id' => $id
             ]
         ]);
         return $res->toArray();
