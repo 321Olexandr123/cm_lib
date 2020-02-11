@@ -70,6 +70,7 @@ class Stock
      * @param int $amount
      * @param string $currency
      * @param float $constant
+     * @param string $callBackUrl
      * @param string $bearer
      * @return array
      * @throws ClientExceptionInterface
@@ -78,7 +79,7 @@ class Stock
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public static function withdraw(string $address, int $amount, string $currency, float $constant, string $bearer)
+    public static function withdraw(string $address, int $amount, string $currency, float $constant, string $callBackUrl, string $bearer)
     {
         $client = new NativeHttpClient();
 
@@ -92,6 +93,7 @@ class Stock
                 'amount' => $amount,
                 'currency' => $currency,
                 'constant' => $constant,
+                'url' => $callBackUrl
             ]
         ]);
         return $response->toArray();
