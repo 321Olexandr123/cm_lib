@@ -127,30 +127,54 @@ class Stock
         return $response->toArray();
     }
 
+//    /**
+//     * @param string $txn
+//     * @param string $bearer
+//     * @return array
+//     * @throws ClientExceptionInterface
+//     * @throws DecodingExceptionInterface
+//     * @throws RedirectionExceptionInterface
+//     * @throws ServerExceptionInterface
+//     * @throws TransportExceptionInterface
+//     */
+//    public
+//    static function checkDepositStatus(string $txn, string $bearer)
+//    {
+//        $client = new NativeHttpClient();
+//
+//        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/deposit-status', [
+//            'headers' => [
+//                'Content-Type' => 'application/json',
+//                'Authorization' => 'Bearer ' . $bearer
+//            ],
+//            'json' => [
+//                'txn' => $txn,
+//            ]
+//        ]);
+//        return $response->toArray();
+//    }
+
     /**
-     * @param string $txn
+     * @param int $id
+     * @param string $currency
      * @param string $bearer
-     * @return array
-     * @throws ClientExceptionInterface
-     * @throws DecodingExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
+     * @return void
      * @throws TransportExceptionInterface
      */
     public
-    static function checkDepositStatus(string $txn, string $bearer)
+    static function getWithdrawStatus(int $id, string $currency, string $bearer)
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/deposit-status', [
+        $res = $client->request('POST', 'http://cm.crpt.trading/exchange/withdraw-status', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
             ],
             'json' => [
-                'txn' => $txn,
+                'id' => $id,
+                'currency' => $currency
             ]
         ]);
-        return $response->toArray();
     }
 }
