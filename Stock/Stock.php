@@ -29,7 +29,7 @@ class Stock
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/generate-cryptocurrency', [
+        $response = $client->request('POST', 'https://cm.crpt.trading/exchange/generate-cryptocurrency', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
@@ -53,7 +53,7 @@ class Stock
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/active-cryptocurrency', [
+        $response = $client->request('POST', 'https://cm.crpt.trading/exchange/active-cryptocurrency', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
@@ -83,7 +83,7 @@ class Stock
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/withdraw', [
+        $response = $client->request('POST', 'https://cm.crpt.trading/exchange/withdraw', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
@@ -115,7 +115,7 @@ class Stock
     {
         $client = new NativeHttpClient();
 
-        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/create-payment', [
+        $response = $client->request('POST', 'https://cm.crpt.trading/exchange/create-payment', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
@@ -172,7 +172,7 @@ class Stock
     {
         $client = new NativeHttpClient();
 
-        $res = $client->request('POST', 'http://cm.crpt.trading/exchange/withdraw-status', [
+        $res = $client->request('POST', 'https://cm.crpt.trading/exchange/withdraw-status', [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . $bearer
