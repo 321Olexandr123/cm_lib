@@ -100,65 +100,7 @@ class Stock
     }
 
     /**
-     * @param string $email
-     * @param string $currency
-     * @param float $amount
-     * @param string $bearer
-     * @return array
-     * @throws ClientExceptionInterface
-     * @throws DecodingExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
-     */
-    public static function createPayment(string $email, string $currency, float $amount, string $bearer)
-    {
-        $client = new NativeHttpClient();
-
-        $response = $client->request('POST', 'https://cm.crpt.trading/exchange/create-payment', [
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $bearer
-            ],
-            'json' => [
-                'currency' => $currency,
-                'amount' => $amount,
-                'email' => $email
-            ]
-        ]);
-        return $response->toArray();
-    }
-
-//    /**
-//     * @param string $txn
-//     * @param string $bearer
-//     * @return array
-//     * @throws ClientExceptionInterface
-//     * @throws DecodingExceptionInterface
-//     * @throws RedirectionExceptionInterface
-//     * @throws ServerExceptionInterface
-//     * @throws TransportExceptionInterface
-//     */
-//    public
-//    static function checkDepositStatus(string $txn, string $bearer)
-//    {
-//        $client = new NativeHttpClient();
-//
-//        $response = $client->request('POST', 'http://cm.crpt.trading/exchange/deposit-status', [
-//            'headers' => [
-//                'Content-Type' => 'application/json',
-//                'Authorization' => 'Bearer ' . $bearer
-//            ],
-//            'json' => [
-//                'txn' => $txn,
-//            ]
-//        ]);
-//        return $response->toArray();
-//    }
-
-    /**
      * @param int $id
-     * @param string $currency
      * @param string $bearer
      * @return array
      * @throws ClientExceptionInterface
@@ -179,6 +121,60 @@ class Stock
             ],
             'json' => [
                 'id' => $id
+            ]
+        ]);
+        return $res->toArray();
+    }
+
+    /**
+     * @param string $abbreviation
+     * @param string $bearer
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public
+    static function createDepositAddress(string $abbreviation, string $bearer)
+    {
+        $client = new NativeHttpClient();
+
+        $res = $client->request('POST', 'https://cm.crpt.trading/payment/create-address', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $bearer
+            ],
+            'json' => [
+                'asset' => $abbreviation
+            ]
+        ]);
+        return $res->toArray();
+    }
+
+    /**
+     * @param string $paymentId
+     * @param string $bearer
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public
+    static function getDepositStatus(string $paymentId, string $bearer)
+    {
+        $client = new NativeHttpClient();
+
+        $res = $client->request('POST', 'https://cm.crpt.trading/payment/check-transactions', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $bearer
+            ],
+            'json' => [
+                'id' => $paymentId
             ]
         ]);
         return $res->toArray();
