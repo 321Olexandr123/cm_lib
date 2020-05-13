@@ -179,4 +179,27 @@ class Stock
         ]);
         return $res->toArray();
     }
+
+    /**
+     * @param string $bearer
+     * @return array
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public
+    static function getBalance(string $bearer)
+    {
+        $client = new NativeHttpClient();
+
+        $res = $client->request('POST', 'https://cm.crpt.trading/exchange/balance', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $bearer
+            ],
+        ]);
+        return $res->toArray();
+    }
 }
